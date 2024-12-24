@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ product.title }}</h2>
+<p>
+    등록자: 
+    <a href="{% url 'accounts:profile' product.user.username %}">
+        {{ product.user.username }}
+    </a>
+    / 등록일: {{ product.created_at|date:"Y-m-d H:i" }}
+</p>
+<p>조회수: {{ product.views }} / 찜수: {{ product.like_count }}</p>
+{% if product.image %}
+<img src="{{ product.image.url }}" width="300">
+{% endif %}
+<p>{{ product.description }}</p>
+<p>
+해시태그:
+{% for ht in product.hashtags.all %}
+    #{{ ht.name }}
+{% endfor %}
+</p>
+
+
+
+
+
+<a href="{% url 'products:product_list' %}">목록으로</a>
+{% endblock %}

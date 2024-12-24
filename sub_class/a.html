@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    function loginFunction(event) {
+        event.preventDefault(); // 기본 제출 동작 방지
+        
+        const id = document.querySelector('#login_id').value;
+        const pw = document.querySelector('#login_pw').value;
+        
+        fetch(
+            "http://localhost:3000/login",
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    id: id,
+                    pw: pw
+                })
+            }
+        ).then((data) => {
+            console.log(data)
+        });
+    }
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1e1e1e;
+        }
+
+        .login-container {
+            background-color: #555555;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 300px;
+        }
+
+        .login-container h1 {
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        .login-container h1 img {
+            width: 16px;
+            height: auto;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #333333;
+            color: #FFFFFF;
+            font-size: 14px;
+        }
+
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #b03030;
+            color: #FFFFFF;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .login-container input[type="submit"]:hover {
+            background-color: #992525;
+        }
+
+        .login-container p {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #FFFFFF;
+        }
+
+        .login-container a {
+            color: #cccccc;
+            text-decoration: none;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="login-container">
+        <h1><img src="icon.png" alt="Logo"> ChocoTrack <br> Welcome Back</h1>
+        <form>
+            <input id="login_id" type="text" name="username" placeholder="Username">
+            <input id="login_pw" type="password" name="password" placeholder="Password">
+            <input type="onclick="loginFunction" value="Log In">
+        </form>
+        <p>Don't have an account? <a href="#">Register</a></p>
+    </div>
+
+</body>
+</html>

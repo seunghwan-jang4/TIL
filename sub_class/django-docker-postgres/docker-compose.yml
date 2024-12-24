@@ -1,0 +1,25 @@
+version: '3.9'  # 파이썬의 버전
+
+services:  # 내가 띄울 컨테이너 목록
+  db:  # db라는 이름을 가진 컨테이너
+    image: postgres:13  # postgres 13 버전 이미지를 가져올 거야.
+    environment:  # db 컨테이너의 환경변수
+      POSTGRES_DB: mydb  # 데이터베이스 이름
+      POSTGRES_USER: myuser  # 데이터베이스 소유자(만든 사람)의 ID
+      POSTGRES_PASSWORD: mypassword  # 소유자의 비밀 번호
+    ports:  # 포트포워딩할 거다. (들어온 포트랑 나가는 포트랑 연결)
+      - "5432:5432"  # 5432 포트로 외부에서 접속하면, 컨테이너 안의 5432 포트로 연결해 줘.
+    volumes: # 컨테이너의 볼륨(하드디스크) 경로를 설정해준다.
+      - postgres_data:/var/lib/postgresql/data  # 이건 정해져있는 값
+  # 다른 컨테이너
+  web:  # web이라는 이름을 가진 컨테이너
+    build: .  # 지금 docker-compose가 있는 경로를 docker build해서 이미지 만들어라.
+    volumes:  # web 컨테이너의 볼륨 설정
+      - .:/app  # 지금 docker-compose.yml이 있는 경로는 컨테이너의 app 폴더랑 같다.
+    ports: # 포트포워딩할 거다. (들어온 포트랑 나가는 포트랑 연결)
+      - "8000:8000" # 8000번 포트로 외부에서 들어오는 걸, 컨테이너 안에 있는 8000번 포트랑 연결해 줘.
+    depends_on:  # web 컨테이너는 의존해야 해. 어디에?
+      - db  # db 컨테이너에.
+
+volumes:  # 볼륨 이름 짓기
+  postgres_data:  # postgres_data라는 볼륨 이름

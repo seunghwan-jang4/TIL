@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 def user_profile_image_path(instance, filename):
-    return f'profile_images/{instance.username}'
+    return f'profile_images/{instance.username}/{filename}'
 
 # 프로필 이미지, 팔로우 수, 팔로잉 수
 class User(AbstractUser):
