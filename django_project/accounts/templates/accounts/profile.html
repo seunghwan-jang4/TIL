@@ -26,3 +26,21 @@
 {% endif %}
 
 {% endblock %}
+
+<h3>내가 등록한 물품들</h3>
+<ul>
+{% for product in my_products %}
+    <li><a href="{% url 'products:product_detail' product.pk %}">{{ product.title }}</a></li>
+{% empty %}
+    <li>등록한 물품이 없습니다.</li>
+{% endfor %}
+</ul>
+
+<h3>내가 찜한 물품들</h3>
+<ul>
+{% for product in liked_products %}
+    <li><a href="{% url 'products:product_detail' product.pk %}">{{ product.title }}</a></li>
+{% empty %}
+    <li>찜한 물품이 없습니다.</li>
+{% endfor %}
+</ul>

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .models import User
+from products.models import Product
 
 # Create your views here.
 def signup_view(request):
@@ -40,10 +41,11 @@ def logout_view(request):
 @login_required
 def profile_view(request, username):
     profile_user = get_object_or_404(User, username=username)
+    
     # 등록 물품
-    
+    my_products = Product.objects.filter(User, username=username)
     # 찜한 물품
-    
+    liked_products = profile_user.liked_products.all()
     # 팔로잉 여부!
     # 로그인한 사용자(request.user)가 해당 profile_user를 팔로우 하고 있는지 확인하는거!
     # TRUE/FALSE 반환
@@ -51,7 +53,10 @@ def profile_view(request, username):
     
     context = {
         'profile_user': profile_user,
+        'my_products': my_products,
+        'liked_products': liked_products,
         'is_following': is_following,
+        
     }
     
     return render(request, 'accounts/profile.html', context)

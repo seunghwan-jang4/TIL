@@ -2,12 +2,11 @@
 {% block content %}
 <h2>상품 목록</h2>
 
-
-
 <ul>
 {% for product in products %}
     <li>
-            {{ product.title }} - ({{ product.user.username }})
+        <a href="{% url 'products:product_detail' product.pk %}">
+            /{{ product.title }} - ({{ product.user.username }})
             [조회수: {{ product.views }}, 찜수: {{ product.like_count }}]
             {% for ht in product.hashtags.all %}
                 #{{ ht.name }}

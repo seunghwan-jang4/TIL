@@ -4,21 +4,19 @@ from .models import Product, HashTag
 class ProductForm(forms.ModelForm):
     hashtags_str = forms.CharField(required=False)
     
-def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)  # user 인자를 뽑는 것
         super().__init__(*args, **kwargs)  # 부모 클래스 초기화
     
-class Meta:
-    model = Product
-    fields = ['title', 'description', 'image', 'hashtags_str']
-    
-# save 메서드는 폼에서 입려간 데이터를 db에 적재한다.   
+    class Meta:
+        model = Product
+        fields = ['title', 'description', 'image', 'hashtags_str']
+    # save 메서드는 폼에서 입려간 데이터를 db에 적재한다.   
     def save(self, commit=True):
         # 부모 클래스의 save 매서드를 호출하되, commit=False 할 것이다 -> 해당 상품을 들고도오되 db에는 product 저장하지 않겠다.
         # 1. product 객체를 생성하고, 추가 작업(해시태그 처리)을 완료한뒤에서 commit을 한다(db에 반영한다.)
         # 2. user와 연결을 또 시켜줘야합니다. 그 결과를 db에 적재하기 위해서 일단 commit을 false로 둔다.
         product = super().save(commit=False)
-        
         if self.user:
             product.user = self.user
         
