@@ -8,6 +8,7 @@ def product_list_view(request):
     products = Product.objects.all()
     return render(request, 'products/product_list.html', {'products':products})
 
+
 @login_required
 def product_create_view(request):
     if request.method == 'POST':

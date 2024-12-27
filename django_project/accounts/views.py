@@ -38,17 +38,17 @@ def logout_view(request):
     logout(request)
     return redirect('accounts:login')
 
-@login_required
+@login_required 
 def profile_view(request, username):
     profile_user = get_object_or_404(User, username=username)
-    
     # 등록 물품
-    my_products = Product.objects.filter(User, username=username)
+
+    my_products = Product.objects.filter(user=profile_user)
+    print(my_products)
     # 찜한 물품
     liked_products = profile_user.liked_products.all()
-    # 팔로잉 여부!
-    # 로그인한 사용자(request.user)가 해당 profile_user를 팔로우 하고 있는지 확인하는거!
-    # TRUE/FALSE 반환
+    print(liked_products)
+    # 팔로잉 여부
     is_following = request.user.follows.filter(pk=profile_user.pk).exists()
     
     context = {
@@ -56,24 +56,23 @@ def profile_view(request, username):
         'my_products': my_products,
         'liked_products': liked_products,
         'is_following': is_following,
-        
     }
-    
     return render(request, 'accounts/profile.html', context)
 
+@login_required
 def profile_edit(request, username):
     if request.user.username != username:
         return redirect('accounts:profile', username=username)
-    
-    user = get_object_or_404(user, username)
-    if request.method == 'POST':
+
+    user = get_object_or_404(User, username=username)
+    if request.method == "POST":
         form = ProflieForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
             return redirect('accounts:profile', username=username)
     else:
         form = ProflieForm(instance=user)
-    
+
     return render(request, 'accounts/profile_edit.html', {'form': form})
 
 def follow_view(request, username):
@@ -86,4 +85,3 @@ def follow_view(request, username):
         else:
             request.user.follows.add(target_user)
     return redirect('accounts:profile', username=username)
-        
