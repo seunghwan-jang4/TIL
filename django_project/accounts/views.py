@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import User
 from products.models import Product
 
-# Create your views here.
+# 회원가입
 def signup_view(request):
     if request.method == "POST":
         form = SignupForm(request.POST, request.FILES)
@@ -42,12 +42,9 @@ def logout_view(request):
 def profile_view(request, username):
     profile_user = get_object_or_404(User, username=username)
     # 등록 물품
-
     my_products = Product.objects.filter(user=profile_user)
-    print(my_products)
     # 찜한 물품
     liked_products = profile_user.liked_products.all()
-    print(liked_products)
     # 팔로잉 여부
     is_following = request.user.follows.filter(pk=profile_user.pk).exists()
     
