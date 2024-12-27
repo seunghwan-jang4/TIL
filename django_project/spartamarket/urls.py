@@ -20,10 +20,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls')),
-    path('products/', include('products.urls')),
+    path('admin/', admin.site.urls),    # 관리자 페이지 경로.
+    path('accounts/', include('accounts.urls')),    # accounts의 URL을 포함.
+    path('products/', include('products.urls')),    # products의 URL을 포함.
 ]
 
+# 디버그 모드일 때, 미디어 파일 제공.
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

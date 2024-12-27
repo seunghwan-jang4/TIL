@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'products',
 ]
 
+# 사용자 모델 설정
 AUTH_USER_MODEL = 'accounts.user'
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'spartamarket.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],   # 프로젝트의 루트 디렉토리(BASE_DIR) 내에 있는 templates 폴더로 경로 설정.
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'ko-kr'
+LANGUAGE_CODE = 'ko-kr' # 한국어 설정.
 
-TIME_ZONE = 'Asia/Seoul'
+TIME_ZONE = 'Asia/Seoul' # 아시아의 서울로 설정.
 
 USE_I18N = True
 
@@ -119,11 +120,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+# Static files (CSS, JavaScript, images) 관련 설정
+STATIC_URL = 'static/'  # 웹에서 정적 파일을 접근할 때 사용되는 URL 경로.
+STATICFILES_DIRS = [BASE_DIR / 'static']  # BASE_DIR을 프로젝트의 루트 디렉토리로 설정.
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# 미디어 파일 설정
+MEDIA_URL = '/media/'  # 미디어 파일이 사용되는 URL 경로.
+MEDIA_ROOT = BASE_DIR / 'media'  # 미디어 파일이 저장될 디렉토리. 프로젝트 루트 디렉토리에 'media' 폴더가 생성됨.
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
