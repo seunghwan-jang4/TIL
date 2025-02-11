@@ -1,3 +1,5 @@
+from collections import deque
+
 def isPalindrome(ln):
     arr = []
     head = ln.head
@@ -17,3 +19,35 @@ def isPalindrome(ln):
             return False
 
     return True
+
+
+# 유효한 괄호 문제
+def test_problem_stack(s):
+    pair = {
+        '}': '{',
+        ')': '(',
+        ']': '[',
+    }
+    opener = "({["
+    stack = []
+
+    for char in s:
+        if char in opener:
+            stack.append(char)
+        else:
+            if not stack:
+                return False
+            top = stack.pop()
+            if pair[char] != top:
+                return False
+
+    return not stack
+
+
+# 줄서기
+def test_problem_queue(num):
+    deq = deque([i for i in range(1, num + 1)])
+    while len(deq) > 1:
+        deq.popleft()
+        deq.append(deq.popleft())
+    return deq.popleft()

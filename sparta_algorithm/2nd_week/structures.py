@@ -46,3 +46,80 @@ class Stack:
 
     def is_empty(self):
         return self.top is None
+    
+    
+# 큐
+class Queue:
+    def __init__(self):
+        self.front = None
+
+    def push(self, value):
+        if not self.front:
+            self.front = Node(value)
+            return
+
+        node = self.front
+        while node.next:
+            node = node.next
+        node.next = Node(value)
+
+    def pop(self):
+        if not self.front:
+            return None
+
+        node = self.front
+        self.front = self.front.next
+        return node.val
+
+    def is_empty(self):
+        return self.front is None
+    
+
+# 해시테이블 체이닝
+class HashNode:
+    def __init__(self, key=None, value=None):
+        self.key = key
+        self.value = value
+        self.next = None
+
+
+class HashTable:
+    def __init__(self):
+        self.size = 10
+        self.table = [None] * self.size
+
+    def _hash_function(self, key):
+        return key % self.size
+
+    def put(self, key, value):
+        index = self._hash_function(key)
+        if self.table[index] is None:
+            self.table[index] = HashNode(key, value)
+        else:
+            node = self.table[index]
+            while node.next is not None:
+                node = node.next
+            node.next = HashNode(key, value)
+
+    def get(self, key):
+        index = self._hash_function(key)
+        node = self.table[index]
+        while node is not None:
+            if node.key == key:
+                return node.value
+            node = node.next
+        return -1
+
+    def remove(self, key):
+        index = self._hash_function(key)
+        node = self.table[index]
+        prev_node = None
+        while node is not None:
+            if node.key == key:
+                if prev_node is None:
+                    self.table[index] = node.next
+                else:
+                    prev_node.next = node.next
+                return
+            prev_node = node
+            node = node.next
