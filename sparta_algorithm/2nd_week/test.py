@@ -1,5 +1,5 @@
 from structures import LinkedList, Stack, Queue, HashTable
-from prac import isPalindrome, test_problem_stack, test_problem_queue
+from prac import isPalindrome, test_problem_stack, test_problem_queue, dfs_recursive, dfs_stack
 
 # 연결리스트
 l1 = LinkedList()
