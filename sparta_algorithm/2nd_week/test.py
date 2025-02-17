@@ -1,5 +1,5 @@
 from structures import LinkedList, Stack, Queue, HashTable
-from prac import isPalindrome, test_problem_stack, test_problem_queue, dfs_recursive, dfs_stack
+from prac import isPalindrome, test_problem_stack, test_problem_queue
 
 # 연결리스트
 l1 = LinkedList()
@@ -95,21 +95,3 @@ assert ht.get(22) == 2
 assert ht.get(32) == 3
 
 ht.get(2)
-
-
-# 깊이 우선 탐색 (DFS)
-graph = {
-    1: [2, 5, 9],
-    2: [1, 3],
-    3: [2, 4],
-    4: [3],
-    5: [1, 6, 8],
-    6: [5, 7],
-    7: [6],
-    8: [5],
-    9: [1, 10],
-    10: [9]
-}
-
-assert dfs_recursive(graph, 1, []) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-assert dfs_stack(graph, 1) == [1, 9, 10, 5, 8, 6, 7, 2, 3, 4]
