@@ -1,7 +1,6 @@
 from collections import deque
 
-
-# BFS를 이용한 미로 탈출 문제 풀이
+# BFS를 이용한 미로 탈출 문제
 def bfs_maze_escape(maze):
     N, M = len(maze), len(maze[0])  # 미로의 크기
     visited = [[False] * M for _ in range(N)]  # 방문한 위치를 추적하는 배열
