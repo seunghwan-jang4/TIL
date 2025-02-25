@@ -1,5 +1,5 @@
 
-from prac import dfs_recursive, dfs_stack, island_dfs_recursive, island_dfs_stack, bfs_queue, island_bfs, nqueen
+from prac import dfs_recursive, dfs_stack, island_dfs_recursive, island_dfs_stack, bfs_queue, island_bfs, nqueen, binary_search
 
 # 깊이 우선 탐색 (DFS)
 graph = {
@@ -82,3 +82,8 @@ assert island_bfs(grid=[
 
 # N-Queen 문제
 assert nqueen(4) == [[".Q..", "...Q", "Q...", "..Q."], ["..Q.", "Q...", "...Q", ".Q.."]]
+
+
+# 이진 탐색
+assert binary_search(nums=[-1, 0, 3, 5, 9, 12], target=9) == 4
+assert binary_search(nums=[-1, 0, 3, 5, 9, 12], target=2) == -1
